@@ -7,7 +7,7 @@ import { getSortedPostsData } from '@/lib/posts';
 import Link from 'next/link';
 import Date from '@/components/date';
 
-export default function Home({ allPostsData }: any) {
+export default function Home({ allPostsData, secret, other }: any) {
 
 
   return (
@@ -16,7 +16,7 @@ export default function Home({ allPostsData }: any) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello</p>
+        <p>Hello the secret is {secret}. Ohter key from next config: {other}</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
@@ -46,6 +46,8 @@ export async function getStaticProps() {
   return {
     props: {
       allPostsData,
+      secret: process.env.HIDDEN_VAL,
+      other: process.env.customKey
     },
   };
 }
